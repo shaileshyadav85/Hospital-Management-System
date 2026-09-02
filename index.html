@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        h1 {
+            color: #1a237e;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .feature-item span {
+            font-size: 1.5rem;
+        }
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #1a237e;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0d47a1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+        }
+        .btn-secondary {
+            background: #e3f2fd;
+            color: #1a237e;
+        }
+        .btn-secondary:hover {
+            background: #bbdefb;
+            transform: translateY(-2px);
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            color: #1b5e20;
+            font-size: 0.9rem;
+        }
+        .status .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 30px 20px; }
+            .features { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
+            .btn { width: 100%; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🏥</div>
+        <h1>Hospital Management System</h1>
+        <p class="subtitle">
+            Complete healthcare management solution for modern hospitals
+        </p>
+
+        <div class="features">
+            <div class="feature-item">
+                <span>👤</span>
+                <p>Patient Management</p>
+            </div>
+            <div class="feature-item">
+                <span>👨‍⚕️</span>
+                <p>Doctor Management</p>
+            </div>
+            <div class="feature-item">
+                <span>📅</span>
+                <p>Appointment Booking</p>
+            </div>
+            <div class="feature-item">
+                <span>💊</span>
+                <p>Medical Records</p>
+            </div>
+            <div class="feature-item">
+                <span>💰</span>
+                <p>Billing System</p>
+            </div>
+            <div class="feature-item">
+                <span>📊</span>
+                <p>Dashboard & Reports</p>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <a href="/client/index.html" class="btn btn-primary">Launch App</a>
+            <a href="/api/health" class="btn btn-secondary" target="_blank">Check API Status</a>
+        </div>
+
+        <div class="status">
+            <span class="dot"></span>
+            System is ready and running
+        </div>
+    </div>
+</body>
+</html>
