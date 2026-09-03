@@ -226,12 +226,16 @@ npm install
 npm run dev
 
 ### Step 4: Access Application
+```bash
 Frontend: http://localhost:3000
 Backend: http://localhost:5000
+```
 
 ### Step 5: Default Login Credentials
+```bash
 Email: test@example.com
 Password: password123
+```
 
 
 
