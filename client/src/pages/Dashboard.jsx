@@ -25,95 +25,75 @@ const Dashboard = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                setLoading(true);
+                
+                // ✅ FIXED: No /api prefix - Sirf ye lines change hui hain
+                const [appointmentsRes, patientsRes, doctorsRes, revenueRes] = await Promise.all([
+                    axios.get('/appointments/my-appointments'),
+                    axios.get('/patients/count'),
+                    axios.get('/doctors/count'),
+                    axios.get('/billing/revenue')
+                ]);
+
+                const today = new Date().toISOString().split('T')[0];
+                const todayApps = appointmentsRes.data?.data?.filter(
+                    a => new Date(a.date).toISOString().split('T')[0] === today
+                ) || [];
+
+                const pendingApps = appointmentsRes.data?.data?.filter(
+                    a => a.status === 'pending' || a.status === 'confirmed'
+                ) || [];
+
+                setStats({
+                    totalPatients: patientsRes.data?.count || 0,
+                    totalDoctors: doctorsRes.data?.count || 0,
+                    todayAppointments: todayApps.length,
+                    totalRevenue: revenueRes.data?.total || 0,
+                    pendingAppointments: pendingApps.length
+                });
+
+                const recent = appointmentsRes.data?.data?.slice(0, 5) || [];
+                setRecentAppointments(recent);
+
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error);
+                toast.error('Failed to load dashboard data');
+            } finally {
+                setLoading(false);
+            }
+        };
+
         fetchDashboardData();
     }, []);
 
-    const fetchDashboardData = async () => {
-        try {
-            setLoading(true);
-            
-            const [appointmentsRes, patientsRes, doctorsRes, revenueRes] = await Promise.all([
-                axios.get('/appointments/my-appointments'),
-                axios.get('/patients/count'),
-                axios.get('/doctors/count'),
-                axios.get('/billing/revenue')
-            ]);
+    // Navigation Functions
+    const goToDoctors = () => navigate('/doctors');
+    const goToAppointments = () => navigate('/appointments');
+    const goToBilling = () => navigate('/billing');
+    const goToPatients = () => navigate('/patients');
+    const goToReports = () => navigate('/admin/reports');
 
-            const today = new Date().toISOString().split('T')[0];
-            const todayApps = appointmentsRes.data?.data?.filter(
-                a => new Date(a.date).toISOString().split('T')[0] === today
-            ) || [];
-
-            const pendingApps = appointmentsRes.data?.data?.filter(
-                a => a.status === 'pending' || a.status === 'confirmed'
-            ) || [];
-
-            setStats({
-                totalPatients: patientsRes.data?.count || 0,
-                totalDoctors: doctorsRes.data?.count || 0,
-                todayAppointments: todayApps.length,
-                totalRevenue: revenueRes.data?.total || 0,
-                pendingAppointments: pendingApps.length
-            });
-
-            const recent = appointmentsRes.data?.data?.slice(0, 5) || [];
-            setRecentAppointments(recent);
-
-        } catch (error) {
-            console.error('Error fetching dashboard data:', error);
-            toast.error('Failed to load dashboard data');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // ✅ QUICK ACTIONS FUNCTIONS
-    const handleBookAppointment = () => {
-        console.log('📋 Book Appointment clicked!');
-        setShowModal(true);
-    };
-
+    // Quick Actions
+    const handleBookAppointment = () => setShowModal(true);
     const handleAddPatient = () => {
-        console.log('📋 Add Patient clicked!');
         toast.success('Navigating to add patient...');
         navigate('/patients/add');
     };
-
     const handleWritePrescription = () => {
-        console.log('📋 Write Prescription clicked!');
         toast.success('Opening prescription...');
         navigate('/medical-records/add');
     };
-
     const handleEmergency = () => {
-        console.log('🚨 Emergency Alert!');
         toast.error('🚨 Emergency alert sent to all staff!');
     };
-
     const handleReports = () => {
-        console.log('📊 Reports clicked!');
         toast.success('Loading reports...');
         navigate('/admin/reports');
     };
 
-    // ✅ NAVIGATION FUNCTIONS
-    const goToDoctors = () => {
-        navigate('/doctors');
-    };
-
-    const goToAppointments = () => {
-        navigate('/appointments');
-    };
-
-    const goToBilling = () => {
-        navigate('/billing');
-    };
-
-    const goToPatients = () => {
-        navigate('/patients');
-    };
-
-    // ✅ STAT CARDS
+    // Stat Cards
     const statCards = [
         { 
             icon: FaUsers, 
@@ -149,7 +129,7 @@ const Dashboard = () => {
         },
     ];
 
-    // ✅ QUICK ACTIONS
+    // Quick Actions Data
     const quickActions = [
         { icon: FaStethoscope, label: 'Book Appointment', color: '#1a237e', onClick: handleBookAppointment },
         { icon: FaPlus, label: 'Add Patient', color: '#4caf50', onClick: handleAddPatient },
@@ -158,7 +138,6 @@ const Dashboard = () => {
         { icon: FaChartLine, label: 'Reports', color: '#9c27b0', onClick: handleReports },
     ];
 
-    // ✅ STATUS COLOR
     const getStatusColor = (status) => {
         switch(status) {
             case 'pending': return '#ff9800';
