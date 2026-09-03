@@ -26,7 +26,11 @@ if (!fs.existsSync(profileDir)) {
 
 // ✅ Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5000'],
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'http://localhost:5000'
+    ],
     credentials: true
 }));
 
@@ -39,7 +43,7 @@ app.use('/uploads', express.static(uploadDir));
 console.log('📁 Uploads directory:', uploadDir);
 console.log('📁 Static files served from: /uploads');
 
-// ✅ MongoDB Connection - FIXED (Removed deprecated options)
+// ✅ MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hospital_db')
 .then(() => {
     console.log('✅ MongoDB Connected');
@@ -48,10 +52,23 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hospital_
 .catch(err => {
     console.error('❌ MongoDB Connection Error:', err.message);
     console.log('💡 Make sure MongoDB is running');
-    console.log('💡 To start MongoDB:');
-    console.log('   - Windows: net start MongoDB');
-    console.log('   - macOS: brew services start mongodb-community');
-    console.log('   - Linux: sudo systemctl start mongod');
+});
+
+// ✅ Root & API Landing Routes (Prevents Cannot GET / and Cannot GET /api)
+app.get('/', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Hospital Management System API is live',
+        healthCheck: '/api/health'
+    });
+});
+
+app.get('/api', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Hospital API root reached successfully',
+        healthCheck: '/api/health'
+    });
 });
 
 // ✅ Import routes with error handling
@@ -67,7 +84,7 @@ try {
 
     console.log('✅ All routes imported successfully');
 
-    // ✅ Routes
+    // ✅ Register API Routes
     app.use('/api/auth', authRoutes);
     app.use('/api/doctors', doctorRoutes);
     app.use('/api/patients', patientRoutes);
@@ -117,7 +134,6 @@ app.get('/api/test-upload', (req, res) => {
 app.use((err, req, res, next) => {
     console.error('❌ Error:', err.stack);
     
-    // Multer error handling
     if (err.code === 'LIMIT_FILE_SIZE') {
         return res.status(400).json({
             success: false,
@@ -138,9 +154,8 @@ app.use((err, req, res, next) => {
     });
 });
 
-// ✅ 404 handler
+// ✅ 404 handler (Keep at bottom)
 app.use((req, res) => {
-    console.log('❌ Route not found:', req.originalUrl);
     res.status(404).json({
         success: false,
         message: `Route ${req.originalUrl} not found`
