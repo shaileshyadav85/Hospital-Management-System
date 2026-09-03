@@ -200,8 +200,10 @@ A complete full-stack Hospital Management System built with the MERN stack (Mong
 - npm or yarn
 
 ### Step 1: Clone the Repository
+```bash
 git clone https://github.com/shaileshyadav85/Hospital-Management-System.git
 cd Hospital-Management-System
+```
 
 ### Step 2: Backend Setup
 cd server
