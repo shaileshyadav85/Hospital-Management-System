@@ -134,63 +134,64 @@ A complete full-stack Hospital Management System built with the MERN stack (Mong
 | **Vercel** | Frontend Hosting |
 | **MongoDB Atlas** | Database Hosting |
 
-## 📁 Project Shospital-management-system/
-├── client/ # Frontend React App
-│ ├── src/
-│ │ ├── components/ # Reusable components
-│ │ │ ├── Layout.jsx
-│ │ │ ├── Layout.css
-│ │ │ └── PrivateRoute.jsx
-│ │ ├── context/ # React Context
-│ │ │ └── AuthContext.jsx
-│ │ ├── pages/ # Page components
-│ │ │ ├── Dashboard.jsx
-│ │ │ ├── Patients.jsx
-│ │ │ ├── Doctors.jsx
-│ │ │ ├── Appointments.jsx
-│ │ │ ├── MedicalRecords.jsx
-│ │ │ ├── Billing.jsx
-│ │ │ ├── Profile.jsx
-│ │ │ ├── Login.jsx
-│ │ │ └── Register.jsx
-│ │ ├── App.jsx
-│ │ ├── main.jsx
-│ │ └── index.css
-│ ├── package.json
-│ └── vite.config.js
-├── server/ # Backend Node.js App
-│ ├── controllers/ # Controllers
-│ │ ├── authController.js
-│ │ ├── patientController.js
-│ │ ├── doctorController.js
-│ │ ├── appointmentController.js
-│ │ ├── medicalRecordController.js
-│ │ └── billingController.js
-│ ├── models/ # Database Models
-│ │ ├── User.js
-│ │ ├── Patient.js
-│ │ ├── Doctor.js
-│ │ ├── Appointment.js
-│ │ ├── MedicalRecord.js
-│ │ └── Billing.js
-│ ├── routes/ # API Routes
-│ │ ├── authRoutes.js
-│ │ ├── patientRoutes.js
-│ │ ├── doctorRoutes.js
-│ │ ├── appointmentRoutes.js
-│ │ ├── medicalRecordRoutes.js
-│ │ └── billingRoutes.js
-│ ├── middleware/ # Middleware
-│ │ ├── auth.js
-│ │ └── upload.js
-│ ├── utils/ # Utilities
-│ │ └── email.js
-│ ├── server.js
-│ ├── package.json
-│ └── .env
+## 📁 Project Structure
+hospital-management-system/
+├── client/                          # Frontend React App
+│   ├── src/
+│   │   ├── components/              # Reusable components
+│   │   │   ├── Layout.jsx
+│   │   │   ├── Layout.css
+│   │   │   └── PrivateRoute.jsx
+│   │   ├── context/                 # React Context
+│   │   │   └── AuthContext.jsx
+│   │   ├── pages/                   # Page components
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Patients.jsx
+│   │   │   ├── Doctors.jsx
+│   │   │   ├── Appointments.jsx
+│   │   │   ├── MedicalRecords.jsx
+│   │   │   ├── Billing.jsx
+│   │   │   ├── Profile.jsx
+│   │   │   ├── Login.jsx
+│   │   │   └── Register.jsx
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── package.json
+│   └── vite.config.js
+├── server/                          # Backend Node.js App
+│   ├── controllers/                 # Controllers
+│   │   ├── authController.js
+│   │   ├── patientController.js
+│   │   ├── doctorController.js
+│   │   ├── appointmentController.js
+│   │   ├── medicalRecordController.js
+│   │   └── billingController.js
+│   ├── models/                      # Database Models
+│   │   ├── User.js
+│   │   ├── Patient.js
+│   │   ├── Doctor.js
+│   │   ├── Appointment.js
+│   │   ├── MedicalRecord.js
+│   │   └── Billing.js
+│   ├── routes/                      # API Routes
+│   │   ├── authRoutes.js
+│   │   ├── patientRoutes.js
+│   │   ├── doctorRoutes.js
+│   │   ├── appointmentRoutes.js
+│   │   ├── medicalRecordRoutes.js
+│   │   └── billingRoutes.js
+│   ├── middleware/                  # Middleware
+│   │   ├── auth.js
+│   │   └── upload.js
+│   ├── utils/                       # Utilities
+│   │   └── email.js
+│   ├── server.js
+│   ├── package.json
+│   └── .env
 ├── .gitignore
 ├── index.html
-└── README.md 
+└── README.md
 
 ## 🚀 Installation and Setup
 
